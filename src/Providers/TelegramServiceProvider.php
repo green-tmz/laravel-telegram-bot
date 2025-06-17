@@ -11,7 +11,7 @@ class TelegramServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../../config/telegram.php', 'telegram');
+        $this->mergeConfigFrom(__DIR__.'/../config/telegram.php', 'telegram');
 
         $this->app->singleton('telegram.bot', function ($app) {
             return new TelegramService(
@@ -23,9 +23,9 @@ class TelegramServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__.'/../../config/telegram.php' => config_path('telegram.php'),
+            __DIR__.'/../config/telegram.php' => config_path('telegram.php'),
         ], 'telegram-config');
 
-        $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
     }
 }
