@@ -1,0 +1,31 @@
+{
+    "name": "green-tmz/laravel-telegram-bot",
+    "description": "Telegram Bot Package for Laravel",
+    "minimum-stability": "stable",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Green",
+            "email": "green-tmz@yandex.ru"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "guzzlehttp/guzzle": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Green\\TelegramBot\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Green\\TelegramBot\\Providers\\TelegramServiceProvider"
+            ],
+            "aliases": {
+                "Telegram": "Green\\TelegramBot\\Facades\\Telegram"
+            }
+        }
+    }
+}
