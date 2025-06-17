@@ -3,22 +3,26 @@
 namespace Green\TelegramBot\Console\Commands;
 
 use Illuminate\Console\Command;
-use Green\TelegramBot\Facades\Telegram;
 
 class SetupTelegramWebhook extends Command
 {
-    protected $signature = 'telegram:set-webhook';
-    protected $description = 'Setup Telegram webhook URL';
+    protected $signature = 'telegram:set-webhook {url?}';
+    protected $description = 'Set Telegram bot webhook URL';
 
-    public function handle()
+    public function handle(): void
     {
-        $url = route('telegram.webhook');
-        $this->info("Setting webhook to: {$url}");
+        $telegram = app('telegram.bot');
 
-        if (Telegram::setWebhook($url)) {
-            $this->info('Webhook set successfully!');
-        } else {
-            $this->error('Failed to set webhook');
+        $url = $this->argument('url') ?? config('telegram.webhook_url');
+
+        if (empty($url)) {
+            $this->error('Webhook URL is not configured');
+            return;
         }
+
+        $response = $telegram->setWebhook($url);
+
+        $this->info('Webhook set to: ' . $url);
+        $this->info('Response: ' . json_encode($response, JSON_PRETTY_PRINT));
     }
 }
