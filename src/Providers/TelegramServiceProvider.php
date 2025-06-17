@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Green\TelegramBot\Providers;
 
+use Green\TelegramBot\Console\Commands\SetupTelegramWebhook;
 use Green\TelegramBot\Services\TelegramService;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +26,12 @@ class TelegramServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/telegram.php' => config_path('telegram.php'),
         ], 'telegram-config');
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                SetupTelegramWebhook::class,
+            ]);
+        }
 
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
     }
