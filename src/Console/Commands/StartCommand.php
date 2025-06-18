@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Log;
 
 class StartCommand extends Command
 {
+    protected $signature = 'telegram:start';
+    protected $description = 'Send start command';
+
     public function handle(array $update)
     {
         Log::info("Ok");
