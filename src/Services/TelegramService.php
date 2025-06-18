@@ -4,22 +4,19 @@ declare(strict_types=1);
 
 namespace Green\TelegramBot\Services;
 
-use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class TelegramService
 {
-    protected Client $client;
     protected string $token;
-    protected string $apiUrl = 'https://api.telegram.org/bot';
+    protected string $apiUrl = "https://api.telegram.org/bot" ;
+    protected string $base_uri;
 
     public function __construct(string $token)
     {
         $this->token = $token;
-        $this->client = new Client([
-            'base_uri' => $this->apiUrl . $this->token . '/',
-            'timeout'  => 5.0,
-        ]);
+        $this->base_uri = $this->apiUrl . $this->token;
     }
 
     public function sendMessage(int $chatId, string $text, array $params = [])
@@ -31,7 +28,7 @@ class TelegramService
         ], $params);
 
         try {
-            $response = $this->client->post('sendMessage', ['json' => $data]);
+            $response = Http::post("{$this->base_uri}/sendMessage", ['json' => $data]);
             $responseBody = $response->getBody()->getContents();
             return json_decode($responseBody, true);
         } catch (\Exception $e) {
@@ -40,14 +37,14 @@ class TelegramService
         }
     }
 
-    public function setWebhook(string $url): bool
+    public function setWebhook(string $url)
     {
         try {
-            $response = $this->client->post('setWebhook', [
-                'json' => ['url' => $url]
+            $response = Http::get("{$this->base_uri}/setWebhook", [
+                'url' => $url
             ]);
             $responseBody = $response->getBody()->getContents();
-            return json_decode($responseBody)->ok ?? false;
+            return json_decode($responseBody, true);
         } catch (\Exception $e) {
             Log::error('Webhook Error: ' . $e->getMessage());
             return false;

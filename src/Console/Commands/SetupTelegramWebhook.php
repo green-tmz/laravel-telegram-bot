@@ -13,7 +13,7 @@ class SetupTelegramWebhook extends Command
     {
         $telegram = app('telegram.bot');
 
-        $url = $this->argument('url') ?? config('telegram.webhook_url');
+        $url = $this->argument('url') ?? env("APP_URL") .config('telegram.webhook_url');
 
         if (empty($url)) {
             $this->error('Webhook URL is not configured');
