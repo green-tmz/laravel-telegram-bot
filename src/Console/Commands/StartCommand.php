@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace Green\TelegramBot\Console\Commands;
 
 use Green\TelegramBot\Facades\Telegram;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
-class StartCommand
+class StartCommand extends Command
 {
     public function handle(array $update)
     {
