@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Green\TelegramBot\Console\Commands;
+namespace Green\TelegramBot\Console\Commands\Bot;
 
 use Green\TelegramBot\Facades\Telegram;
 
