@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Green\TelegramBot\Providers;
 
-use Green\TelegramBot\Console\Commands\Bot\StartCommand;
+use Green\TelegramBot\Console\Commands\StartCommand;
 use Green\TelegramBot\Console\Commands\SetupTelegramWebhook;
 use Green\TelegramBot\Services\TelegramService;
 use Illuminate\Support\ServiceProvider;
