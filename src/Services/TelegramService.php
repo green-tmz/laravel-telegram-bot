@@ -28,7 +28,7 @@ class TelegramService
         ], $params);
 
         try {
-            $response = Http::post("{$this->base_uri}/sendMessage", ['json' => $data]);
+            $response = Http::post("{$this->base_uri}/sendMessage", $data);
             $responseBody = $response->getBody()->getContents();
             return json_decode($responseBody, true);
         } catch (\Exception $e) {
