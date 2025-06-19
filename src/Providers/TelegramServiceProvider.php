@@ -35,6 +35,10 @@ class TelegramServiceProvider extends ServiceProvider
             ]);
         }
 
+        $this->publishes([
+            __DIR__.'/../Console/Commands' => app_path('Console/Commands/Telegram'),
+        ], 'telegram-commands');
+
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
     }
 }

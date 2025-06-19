@@ -15,7 +15,6 @@ class StartCommand extends Command
 
     public function handle(array $update)
     {
-        Log::info("Ok");
         $chatId = $update['message']['chat']['id'];
         $name = $update['message']['from']['first_name'];
 
