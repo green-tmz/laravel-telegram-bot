@@ -69,6 +69,6 @@ class TelegramServiceProvider extends ServiceProvider
 
     protected function getPackageNamespace(): string
     {
-        return 'Green\\TelegramBot\\Console\\Commands\\';
+        return '';
     }
 }
