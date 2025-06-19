@@ -2,11 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Green\TelegramBot\Console\Commands;
+namespace App\Console\Commands\Telegram;
 
 use Green\TelegramBot\Facades\Telegram;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
 
 class StartCommand extends Command
 {
