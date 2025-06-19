@@ -34,7 +34,7 @@ class TelegramServiceProvider extends ServiceProvider
         ], 'telegram-config');
 
         $this->publishes([
-            __DIR__.'/../Commands' => app_path('Console/Commands/vendor/TelegramBot'),
+            __DIR__.'/../Console/Commands' => app_path('Console/Commands/vendor/TelegramBot'),
         ], 'telegram-commands');
 
         if ($this->app->runningInConsole()) {
