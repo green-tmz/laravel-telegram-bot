@@ -11,7 +11,12 @@ use Illuminate\Support\ServiceProvider;
 
 class TelegramServiceProvider extends ServiceProvider
 {
-    public function register()
+    protected $commands = [
+        SetupTelegramWebhook::class,
+        StartCommand::class,
+    ];
+
+    public function register(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/telegram.php', 'telegram');
 
@@ -22,23 +27,44 @@ class TelegramServiceProvider extends ServiceProvider
         });
     }
 
-    public function boot()
+    public function boot(): void
     {
         $this->publishes([
             __DIR__.'/../config/telegram.php' => config_path('telegram.php'),
         ], 'telegram-config');
 
         if ($this->app->runningInConsole()) {
-            $this->commands([
-                SetupTelegramWebhook::class,
-                StartCommand::class,
-            ]);
+            $this->registerCommands($this->commands);
         }
 
-        $this->publishes([
-            __DIR__.'/../Console/Commands' => app_path('Console/Commands/Telegram'),
-        ], 'telegram-commands');
-
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+    }
+
+    protected function registerCommands(array $commands): void
+    {
+        $registeredCommands = [];
+
+        foreach ($commands as $command) {
+            $appNamespace = $this->getAppNamespace() . $command;
+            $packageNamespace = $this->getPackageNamespace() . $command;
+
+            if (class_exists($appNamespace)) {
+                $registeredCommands[] = $appNamespace;
+            } else {
+                $registeredCommands[] = $packageNamespace;
+            }
+        }
+
+        $this->commands($registeredCommands);
+    }
+
+    protected function getAppNamespace(): string
+    {
+        return 'App\\Console\\Commands\\Vendor\\TelegramBot\\';
+    }
+
+    protected function getPackageNamespace(): string
+    {
+        return 'Green\\TelegramBot\\Console\\Commands\\';
     }
 }
