@@ -11,7 +11,7 @@ use Illuminate\Support\ServiceProvider;
 
 class TelegramServiceProvider extends ServiceProvider
 {
-    protected $commands = [
+    protected array $commands = [
         SetupTelegramWebhook::class,
         StartCommand::class,
     ];
@@ -32,6 +32,10 @@ class TelegramServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/telegram.php' => config_path('telegram.php'),
         ], 'telegram-config');
+
+        $this->publishes([
+            __DIR__.'/../Commands' => app_path('Console/Commands/vendor/TelegramBot'),
+        ], 'telegram-commands');
 
         if ($this->app->runningInConsole()) {
             $this->registerCommands($this->commands);
