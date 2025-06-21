@@ -1,8 +1,7 @@
 <p align="center">Документация</p>
 
 <p align="center">
-<a href="https://github.com/Opekunov/laravel-centrifugo-broadcaster/releases"><img src="https://img.shields.io/github/release/Opekunov/laravel-centrifugo-broadcaster.svg?style=flat-square" alt="Latest Version"></a>
-<a href="https://packagist.org/packages/green-tmz/laravel-telegram-bot"><img src="https://img.shields.io/packagist/dt/opekunov/laravel-centrifugo-broadcaster.svg?style=flat-square" alt="Total Downloads"></a>
+<a href="https://github.com/green-tmz/laravel-telegram-bot/releases"><img src="https://img.shields.io/badge/release-1.1.1-green" alt="Latest Version"></a>
 <a href="https://github.com/green-tmz/laravel-telegram-bot/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="Software License"></a>
 </p>
 
