@@ -2,8 +2,7 @@
 
 ## Установка
 - `composer require green-tmz/laravel-telegram-bot`
-- `php artisan vendor:publish --tag=telegram-config`
-- `php artisan vendor:publish --provider="Green\TelegramBot\Providers\TelegramServiceProvider" --tag="telegram-config"`
+- `php artisan vendor:publish --provider="Green\TelegramBot\Providers\TelegramServiceProvider"`
 
 ## Настройка
 
